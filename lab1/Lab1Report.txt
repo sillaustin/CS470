@@ -1,0 +1,168 @@
+Austin Sill
+4-22-25
+
+HOW create_files_with_subdirs.sh works.
+==========================================
+First it takes the current date and puts it in a variable
+This variable is used to make the first directory.
+Then a simple for loop is used to create 10 sub directories.
+As each sub directory is made 10 text files are placed into them.
+These text files contain name of a given programming language.
+The loop interval is used as the naming convention for the sub directories but not the text files.
+
+
+LINUX COMMAND EXPLANATION
+============================
+
+"cp": Stands for copy and it allows you to copy files or directories from one location to another. below is an example.
+
+cp target.txt destination.txt
+
+this command would copy the file "target.txt" and create a file called "destination.txt" if a file of the name "destination.txt" already exists it would overwrite it.
+
+====
+
+"ps": stands for Process Status. This shows all the processes running in the current session.
+Below is an example
+
+ps aux
+
+This command shows every process currently running and which user is running the process. additionally it will display cpu and memory usage. below is an example
+
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+austin      8125  0.0  0.4 2397380 75904 ?       Sl   15:04   0:00 /snap/firefox
+
+====
+
+"ls": stands for List. this command will list the contents of a given directory. additionally you can choose to format the results. for example.
+
+ls -l
+
+Will list the contents in long form showing user permissions and other info.
+
+====
+
+"mv": This is the move command. it allows you to move a file or directory into a new directory. i can also allow you to rename a file by moving it to a new name.
+
+mv file1.txt file2.txt /home/user/documents/
+
+would move file1.txt and file2.txt into the documents directory while
+
+mv file1.txt file2.txt /home/user/documents/
+
+would rename file1 to file2
+
+====
+
+"rm": this stands for remove and is used to delete files. this is a permanent change and the files cannot be recovered.
+
+rm file1.txt file2.txt
+
+would permanently remove these files. furthermore this can be done to entire directories. this can be very dangerous if done recklessly
+
+====
+
+"mkdir": this stands for make directory. you can use to to make one or more directories at a time.
+
+mkdir dir1 dir2 dir3
+
+would make 3 directories of names dir1, dir2, and dir3.
+
+====
+
+"rmdir": this stands for remove directory. this is much like the rm command but it will fail if there is a file in the target directory. if you run this command
+
+rmdir folder/
+
+and the folder is not empty the command will fail and this will be the output.
+
+rmdir: failed to remove 'folder/': Directory not empty
+
+====
+
+"echo": this command does that it says. basically it will output anything you write into it. thus
+
+echo "test string"
+
+would output 
+
+test string
+
+by default this print to the terminal but you can redirect it to add to or replace text in files. for example you could do 
+
+echo "this is the test in the file" > text.txt
+
+this would replace all text in the given file. but if you used ">>" instead of ">" it would simply add onto the end of the file. the echo command is especially helpful in shell scripts working a lot like print line might work in other languages.
+
+====
+
+"more": allows you to look through the contents of a file page by page. this is usually only for larger files as smaller ones can be displayed rather easily without cluttering the terminal.
+
+more bigfile.txt
+
+would allow you to scroll through bigfile.txt page by page
+
+====
+
+"date": this command is used to get and set the system date and time. you can also format the date however you like for example
+
+date '+%A'
+
+would output the day of the week it is.
+
+====
+
+"time": might seem similar to date but it is really not. while date is like a clock time is more like a stopwatch for example you could use the command
+
+time mkdir dir1 dir2 dir3
+
+this would make those directories and output something like this
+
+real	0m0.004s
+user	0m0.000s
+sys	0m0.004s
+
+====
+
+"kill":this is used to terminate a process that is running. this is very important for stopping runaway processes. furthermore kill -9 <pid> is a non negotiable kill command that does not try to clean up the process before termination. to run this command you must provide a process id usually this is first fount by running the ps command.
+
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+austin      8125  0.0  0.4 2397380 75904 ?       Sl   15:04   0:00 /snap/firefox
+
+to terminate this process we would use the command
+
+kill 8125
+
+====
+
+"history": this show all the previously run commands in this shell and potentially past ones as well. you can also clear your command history by using history -c
+
+history
+    1  mkdir -p ~/lab1/dir1/dir2/dir3 ~/lab1/dir1/dir4/dir5
+    2  ls -R ~/lab1
+    3  rmdir ~/lab1/dir1/dir4/dir5
+    4  cd /var/log
+    5  cd~
+    6  cd
+    7  pwd
+
+====
+
+"chmod": this command is used to change file permissions. these permissions are read write and execute. often this is operated in something called numeric mode. basically using 3 digits ranging from 0-7 you can determine who can do what with the file. the first digit represents owner permissions, the second is the group permissions, and the last is all other users. 0 would mean no permissons 1 would mean read only 2 would mean write only and 4 would mean execute only. these can all be added together to define the permissions. for example
+
+chmod 741 program.sh
+
+this would mean the user can read write and execute, the group members can execute but not read or write and anyone else can only read. for simple execute permission you could use a command like this
+
+chmod +x program.sh
+
+
+====
+
+"chown": is sort of like chmod but it is used to changed the owner and group that are in control of the file. this is done in the format "chown owner:group filename.txt" this can also be done to whole directories for example
+
+chown -R austin:admin dir3/
+
+this would change owner and group of all the files in dir3
+
+====
